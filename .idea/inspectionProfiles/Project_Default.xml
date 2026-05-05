@@ -1,0 +1,47 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="amqp" />
+          <option value="asgiref" />
+          <option value="attrs" />
+          <option value="billiard" />
+          <option value="celery" />
+          <option value="click" />
+          <option value="click-didyoumean" />
+          <option value="click-plugins" />
+          <option value="click-repl" />
+          <option value="Django" />
+          <option value="django-modeltranslation" />
+          <option value="djangorestframework" />
+          <option value="djangorestframework_simplejwt" />
+          <option value="drf-spectacular" />
+          <option value="inflection" />
+          <option value="jsonschema" />
+          <option value="jsonschema-specifications" />
+          <option value="kombu" />
+          <option value="packaging" />
+          <option value="pillow" />
+          <option value="prompt_toolkit" />
+          <option value="psycopg2-binary" />
+          <option value="PyJWT" />
+          <option value="python-dateutil" />
+          <option value="python-decouple" />
+          <option value="PyYAML" />
+          <option value="referencing" />
+          <option value="rpds-py" />
+          <option value="six" />
+          <option value="sqlparse" />
+          <option value="typing_extensions" />
+          <option value="tzdata" />
+          <option value="tzlocal" />
+          <option value="uritemplate" />
+          <option value="vine" />
+          <option value="wcwidth" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

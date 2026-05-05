@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Husayn Portfolio</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Husayn's Blog</div>
+
+    <div class="menu">
+        <a href="/blog/">Blog</a>
+        <a href="/projects/">Projects</a>
+        <a href="/talks/">Talks</a>
+        <a href="/contact/">Contact</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero-container">
+
+    <div class="hero-left">
+        <img src="{% static 'media/picture.jpg' %}" class="profile-img">
+    </div>
+
+    <div class="hero-right">
+
+        <h1>Husayn Muhammadyahyoyev</h1>
+
+        <h3>Backend Developer | Django Developer</h3>
+
+        <div class="socials">
+            <a href="#">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="https://t.me/">Telegram</a>
+            <a href="#">YouTube</a>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+        </div>
+
+        <p>
+            I am a passionate backend developer focused on Django,
+            building scalable and clean web applications.
+        </p>
+
+        <div class="buttons">
+            <a href="/blog/" class="btn-primary">Read Blog</a>
+            <a href="#about" class="btn-secondary">About Me</a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 Husayn. All rights reserved.
+</div>
+
+</body>
+</html>
