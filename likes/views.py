@@ -1,19 +1,20 @@
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from .models import Post, Like
+from blog.models import Post
+from .models import Like
 
 @login_required
 def like_post(request, pk):
     post = Post.objects.get(id=pk)
 
-    like_obj = Like.objects.filter(user=request.user, post=post).first()
+    liked = False
 
-    if like_obj:
-        # ❌ unlike
-        like_obj.delete()
+    if Like.objects.filter(user=request.user, post=post).exists():
+        # ❌ Unlike
+        Like.objects.filter(user=request.user, post=post).delete()
         liked = False
     else:
-        # ❤️ like
+        # ❤️ Like
         Like.objects.create(user=request.user, post=post)
         liked = True
 

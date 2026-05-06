@@ -20,8 +20,8 @@
     </span>
 
     <!-- LIKE BUTTON -->
-    <button onclick="likePost({{ post.id }})" class="like-btn">
-    ❤️ <span id="like-count">{{ post.total_likes }}</span>
+   <button onclick="likePost({{ post.id }})" class="like-btn">
+        ❤️ <span id="like-count">{{ post.total_likes }}</span>
     </button>
 
     <hr style="margin:20px 0; border:1px solid var(--border);">
@@ -82,6 +82,40 @@
 
 </div>
 
+<script>
+function likePost(postId) {
+    fetch(`/likes/${postId}/like/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCSRFToken(),
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("like-count").innerText = data.likes;
+
+        let btn = document.querySelector(".like-btn");
+
+        if (data.liked) {
+            btn.style.color = "red";   // liked ❤️
+        } else {
+            btn.style.color = "black"; // unliked 🤍
+        }
+    });
+}
+
+function getCSRFToken() {
+    let name = 'csrftoken';
+    let cookies = document.cookie.split(';');
+
+    for (let c of cookies) {
+        c = c.trim();
+        if (c.startsWith(name + '=')) {
+            return c.substring(name.length + 1);
+        }
+    }
+}
+</script>
 
 
 </body>

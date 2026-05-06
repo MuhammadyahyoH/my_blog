@@ -48,7 +48,6 @@ def post_detail(request, pk):
         'next_post': next_post,
     })
 
-from django.shortcuts import get_object_or_404, redirect
 from .models import Comment
 
 def delete_comment(request, pk):
@@ -60,10 +59,6 @@ def delete_comment(request, pk):
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-from django.shortcuts import render
-from .models import About
-
-from django.shortcuts import render
 from datetime import date
 from blog.models import Post
 from projects.models import Project
@@ -81,24 +76,3 @@ def about_me(request):
 
     return render(request, "aboutme.html", context)
 
-from django.http import JsonResponse
-from .models import Post
-
-def like_post(request, pk):
-    post = Post.objects.get(id=pk)
-
-    like_obj, created = Like.objects.get_or_create(
-        user=request.user,
-        post=post
-    )
-
-    if not created:
-        like_obj.delete()   # unlike
-        liked = False
-    else:
-        liked = True
-
-    return JsonResponse({
-        "likes": post.likes.count(),
-        "liked": liked
-    })
