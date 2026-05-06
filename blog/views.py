@@ -47,3 +47,58 @@ def post_detail(request, pk):
         'prev_post': prev_post,
         'next_post': next_post,
     })
+
+from django.shortcuts import get_object_or_404, redirect
+from .models import Comment
+
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, id=pk)
+
+    # faqat comment egasi o‘chira olsin
+    if request.user == comment.user:
+        comment.delete()
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+from django.shortcuts import render
+from .models import About
+
+from django.shortcuts import render
+from datetime import date
+from blog.models import Post
+from projects.models import Project
+from .models import About
+
+def about_me(request):
+    about = About.objects.first()
+
+    context = {
+        "about": about,
+        "projects_count": Project.objects.count(),
+        "posts_count": Post.objects.count(),
+        "years_learning": date.today().year - 2024,  # start year
+    }
+
+    return render(request, "aboutme.html", context)
+
+from django.http import JsonResponse
+from .models import Post
+
+def like_post(request, pk):
+    post = Post.objects.get(id=pk)
+
+    like_obj, created = Like.objects.get_or_create(
+        user=request.user,
+        post=post
+    )
+
+    if not created:
+        like_obj.delete()   # unlike
+        liked = False
+    else:
+        liked = True
+
+    return JsonResponse({
+        "likes": post.likes.count(),
+        "liked": liked
+    })

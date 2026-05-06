@@ -19,6 +19,13 @@
         {{ post.created_at|date:"j F, Y" }}
     </span>
 
+    <!-- LIKE BUTTON -->
+    <button onclick="likePost({{ post.id }})" class="like-btn">
+    ❤️ <span id="like-count">{{ post.total_likes }}</span>
+    </button>
+
+    <hr style="margin:20px 0; border:1px solid var(--border);">
+
     <!-- CONTENT -->
     <div class="post-body">
         <p>{{ post.body }}</p>
@@ -39,14 +46,22 @@
             <p>You must login to comment</p>
         {% endif %}
 
-        {% for c in comments %}
-            <div class="comment-item">
-                <b>{{ c.user.username }}</b>
-                <p>{{ c.text }}</p>
-            </div>
-        {% empty %}
-            <p>No comments yet</p>
-        {% endfor %}
+     {% for c in comments %}
+       <div class="comment-item">
+
+        <b>{{ c.user.username }}</b>
+        <p>{{ c.text }}</p>
+
+        {% if user == c.user %}
+           <a href="{% url 'delete_comment' c.id %}"
+               class="delete-btn"
+               onclick="return confirm('Delete comment?')">
+                🗑 Delete
+            </a>
+        {% endif %}
+
+    </div>
+{% endfor %}
 
     </div>
 
@@ -67,5 +82,8 @@
 
 </div>
 
+
+
 </body>
 </html>
+

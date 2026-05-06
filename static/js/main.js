@@ -19,3 +19,13 @@ function toggleTheme() {
 }
 
 applyTheme(localStorage.getItem('theme') || 'dark');
+
+
+function likePost(postId) {
+    fetch(`/blog/${postId}/like/`)
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("like-count").innerText = data.likes;
+    });
+}
+

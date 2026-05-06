@@ -7,6 +7,9 @@ class Post(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def total_likes(self):
+        return self.likes.count()  # agar related_name="likes" bo‘lsa
+
     def __str__(self):
         return self.title
 
@@ -23,5 +26,12 @@ class Comment(models.Model):
     def __str__(self):
         return self.text[:30]
 
-    class Meta:
-        ordering = ['-created_at']
+
+class About(models.Model):
+    name = models.CharField(max_length=100)
+    role = models.CharField(max_length=150)
+    description = models.TextField()
+    image = models.ImageField(upload_to='about/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
