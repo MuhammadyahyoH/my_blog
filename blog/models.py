@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Post(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField()
@@ -8,6 +9,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-created_at']
 
 
 class Comment(models.Model):
@@ -18,3 +22,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text[:30]
+
+    class Meta:
+        ordering = ['-created_at']

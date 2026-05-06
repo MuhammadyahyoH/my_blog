@@ -2,23 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <title>Husayn Portfolio</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <div class="logo">Husayn's Blog</div>
-
-    <div class="menu">
-        <a href="/blog/">Blog</a>
-        <a href="/projects/">Projects</a>
-        <a href="/talks/">Talks</a>
-        <a href="/contact/">Contact</a>
-    </div>
-</div>
+{% include 'navbar.html' %}
 
 <!-- HERO -->
 <div class="hero-container">
@@ -49,17 +39,14 @@
 
         <div class="buttons">
             <a href="/blog/" class="btn-primary">Read Blog</a>
-            <a href="#about" class="btn-secondary">About Me</a>
+            <a href="/about" class="btn-secondary">About Me</a>
         </div>
 
     </div>
 
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-    © 2026 Husayn. All rights reserved.
-</div>
+{% include 'footer.html' %}
 
 </body>
 </html>

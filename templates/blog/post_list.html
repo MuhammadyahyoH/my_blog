@@ -1,21 +1,84 @@
-<h1 class="page-title">Blog</h1>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog — Husayn</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .blog-page { display: flex; gap: 60px; max-width: 960px; margin: 0 auto; padding: 48px 24px; }
+        .blog-main { flex: 1; }
+        .blog-sidebar { width: 220px; flex-shrink: 0; }
 
-<div class="blog-container">
+        .blog-page-title { font-family: 'DM Serif Display', serif; font-size: 38px; font-weight: 400; text-align: center; margin-bottom: 48px; color: var(--text-primary); letter-spacing: 0.04em; }
 
-    {% for post in page_obj %}
-        <div class="blog-card">
+        .year-badge { display: inline-block; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); font-size: 13px; font-weight: 600; padding: 4px 14px; border-radius: 100px; margin-bottom: 24px; }
 
-            <h2 class="blog-title">{{ post.title }}</h2>
+        .month-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-weight: 400; color: var(--text-primary); margin-bottom: 4px; }
 
-            <p class="blog-text">
-                {{ post.content|truncatewords:25 }}
+        .post-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: padding-left 0.2s; }
+        .post-row:hover { padding-left: 6px; }
+        .post-row:hover .post-row-title { color: var(--accent); }
+
+        .post-row-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+        .post-row-title { font-size: 16px; font-weight: 500; color: var(--text-primary); transition: color 0.2s; }
+        .post-row-arrow { color: var(--text-muted); font-size: 18px; flex-shrink: 0; margin-left: 12px; }
+
+        .month-block { margin-bottom: 36px; }
+
+        /* SIDEBAR */
+        .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 20px; position: sticky; top: 100px; }
+        .sidebar-card h4 { font-family: 'DM Serif Display', serif; font-size: 18px; font-weight: 400; color: var(--text-primary); margin-bottom: 10px; }
+        .sidebar-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+        .sidebar-card a { color: var(--accent); text-decoration: none; }
+        .sidebar-card a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="blog-page">
+    <div class="blog-main">
+        <h1 class="blog-page-title">BLOG</h1>
+
+        {% for year, months in grouped_posts.items %}
+            <div class="year-badge">{{ year }}</div>
+
+            {% for month, posts in months.items %}
+                <div class="month-block">
+                    <h2 class="month-title">{{ month }}</h2>
+
+                    {% for post in posts %}
+                        <a href="{% url 'post_detail' post.pk %}" class="post-row">
+                            <div>
+                                <div class="post-row-meta">{{ post.created_at|date:"j F, Y" }}</div>
+                                <div class="post-row-title">{{ post.title }}</div>
+                            </div>
+                            <span class="post-row-arrow">→</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% empty %}
+            <p style="color: var(--text-secondary); text-align:center; margin-top: 40px;">Hozircha blog postlar yo'q.</p>
+        {% endfor %}
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="blog-sidebar">
+        <div class="sidebar-card">
+            <h4>Obuna Bo'ling</h4>
+            <p>
+                Yangi maqola, maruza va darslarimni
+                <a href="https://t.me/">@husayn</a>
+                telegram kanalimda topishingiz mumkin.
             </p>
-
-            <a href="{% url 'post_detail' post.id %}" class="read-more">
-                See more →
-            </a>
-
         </div>
-    {% endfor %}
-
+    </div>
 </div>
+
+{% include 'footer.html' %}
+
+</body>
+</html>

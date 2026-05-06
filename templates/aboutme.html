@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Me</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<section class="about-wrapper">
+
+    <div class="about-container">
+
+        <!-- LEFT SIDE -->
+        <div class="about-left">
+
+            <div class="avatar-box">
+                <img src="{% static 'img/profile.jpg' %}" alt="profile">
+            </div>
+
+            <h1 class="about-name">Husayn</h1>
+            <p class="about-role">Backend Developer • Django</p>
+
+            <div class="about-buttons">
+                <a href="/blog/" class="btn-primary">My Blog</a>
+                <a href="https://github.com/" class="btn-secondary">GitHub</a>
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="about-right">
+
+            <h2>About Me</h2>
+
+            <p>
+                Men Husaynman 👋 Django backend developer sifatida web ilovalar,
+                API tizimlar va blog platformalar yarataman.
+                Clean code va scalable systemlar ustida ishlashni yaxshi ko‘raman.
+            </p>
+
+            <div class="about-stats">
+
+                <div class="stat">
+                    <h3>5+</h3>
+                    <p>Projects</p>
+                </div>
+
+                <div class="stat">
+                    <h3>2+</h3>
+                    <p>Years Learning</p>
+                </div>
+
+                <div class="stat">
+                    <h3>10+</h3>
+                    <p>Blog Posts</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>

@@ -1,12 +1,21 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const title = document.querySelector("h1");
+const btn = document.getElementById('themeBtn');
 
-    title.style.opacity = 0;
-    title.style.transform = "translateY(20px)";
+function applyTheme(theme) {
+    if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        btn.textContent = '☀️';
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        btn.textContent = '🌙';
+    }
+}
 
-    setTimeout(() => {
-        title.style.transition = "1s";
-        title.style.opacity = 1;
-        title.style.transform = "translateY(0)";
-    }, 300);
-});
+function toggleTheme() {
+    let current = localStorage.getItem('theme') || 'dark';
+    let next = current === 'dark' ? 'light' : 'dark';
+
+    localStorage.setItem('theme', next);
+    applyTheme(next);
+}
+
+applyTheme(localStorage.getItem('theme') || 'dark');

@@ -1,0 +1,40 @@
+{% load static %}
+<div class="navbar">
+    <a href="{% url 'home' %}" class="logo">Husayn's blog</a>
+    <div class="menu">
+        <a href="/blog/">Blog</a>
+        <a href="/projects/">Projects</a>
+        <a href="/talks/">Talks</a>
+        <a href="/contact/">Contact</a>
+        {% if user.is_authenticated %}
+            <a href="/logout/" class="btn-logout">Logout</a>
+        {% endif %}
+
+        <!-- THEME TOGGLE -->
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">🌙</button>
+    </div>
+</div>
+
+<script>
+    const btn = document.getElementById('themeBtn');
+    const saved = localStorage.getItem('theme') || 'dark';
+
+    function applyTheme(theme) {
+        if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            btn.textContent = '☀️';
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            btn.textContent = '🌙';
+        }
+    }
+
+    function toggleTheme() {
+        const current = localStorage.getItem('theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        applyTheme(next);
+    }
+
+    applyTheme(saved);
+</script>

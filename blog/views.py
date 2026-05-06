@@ -1,28 +1,49 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator
 from .models import Post, Comment
 
 
 def post_list(request):
-    posts = Post.objects.all().order_by('-created_at')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    posts = Post.objects.all()
+
+    # Yil va oyga guruhlash
+    from itertools import groupby
+    from collections import defaultdict
+
+    grouped = defaultdict(lambda: defaultdict(list))
+    for post in posts:
+        year = post.created_at.year
+        month = post.created_at.strftime('%B')
+        grouped[year][month].append(post)
+
+    # dict ga o'tkazish (template uchun)
+    grouped_posts = {
+        year: dict(months)
+        for year, months in sorted(grouped.items(), reverse=True)
+    }
+
+    return render(request, 'blog/post_list.html', {
+        'grouped_posts': grouped_posts,
+    })
 
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    comments = post.comments.all().order_by('-id')
+    comments = post.comments.all()
+
+    # Oldingi va keyingi post
+    prev_post = Post.objects.filter(id__lt=pk).order_by('-id').first()
+    next_post = Post.objects.filter(id__gt=pk).order_by('id').first()
 
     if request.method == "POST":
         text = request.POST.get('text')
-
         if request.user.is_authenticated and text:
-            Comment.objects.create(
-                post=post,
-                user=request.user,
-                text=text
-            )
-            return redirect('post_detail', pk=post.id)
+            Comment.objects.create(post=post, user=request.user, text=text)
+            return redirect('post_detail', pk=post.pk)
 
     return render(request, 'blog/post_detail.html', {
         'post': post,
-        'comments': comments
+        'comments': comments,
+        'prev_post': prev_post,
+        'next_post': next_post,
     })

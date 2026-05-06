@@ -1,15 +1,43 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Husayn Blog</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Husayn.com</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
-{% block content %}{% endblock %}
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <a href="{% url 'home' %}" class="logo">Husayn's blog</a>
 
-<script src="{% static 'js/main.js' %}"></script>
+        <div class="menu">
+            <a href="/blog/">Blog</a>
+            <a href="/projects/">Projects</a>
+
+            {% if user.is_authenticated %}
+                <a href="/dashboard/">Dashboard</a>
+                <a href="/logout/" class="btn-logout">Logout</a>
+            {% else %}
+                <a href="/login/">Login</a>
+                <a href="/register/">Register</a>
+            {% endif %}
+
+            <!-- THEME BUTTON -->
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+                🌙
+            </button>
+        </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    {% block content %}{% endblock %}
+
+    <!-- JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+
 </body>
 </html>
