@@ -1,74 +1,48 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>About Me</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
 
-{% include 'navbar.html' %}
-
+{% block content %}
 <section class="about-wrapper">
-
     <div class="about-container">
 
-        <!-- LEFT SIDE -->
+        <!-- LEFT -->
         <div class="about-left">
-
             <div class="avatar-box">
                 {% if about.image %}
                     <img src="{{ about.image.url }}" alt="profile">
                 {% endif %}
             </div>
 
-<h1 class="about-name">{{ about.name }}</h1>
-<p class="about-role">{{ about.role }}</p>
-
-            <h1 class="about-name">Husayn</h1>
-            <p class="about-role">Backend Developer • Django</p>
+            <h1 class="about-name">{{ about.name }}</h1>
+            <p class="about-role">{{ about.role }}</p>
 
             <div class="about-buttons">
                 <a href="/blog" class="btn-primary">My Blog</a>
                 <a href="https://github.com/" class="btn-secondary">GitHub</a>
             </div>
-
         </div>
 
-        <!-- RIGHT SIDE -->
+        <!-- RIGHT -->
         <div class="about-right">
-
             <h2>About Me</h2>
-
-            <p>
-                {{ about.description }}
-            </p>
+            <p>{{ about.description }}</p>
 
             <div class="about-stats">
-
-    <div class="stat">
-        <h3>{{ projects_count }}+</h3>
-        <p>Projects</p>
-    </div>
-
-    <div class="stat">
-        <h3>{{ years_learning }}+</h3>
-        <p>Years Learning</p>
-    </div>
-
-    <div class="stat">
-        <h3>{{ posts_count }}+</h3>
-        <p>Blog Posts</p>
-    </div>
-
-</div>
-
+                <div class="stat">
+                    <h3>{{ projects_count }}+</h3>
+                    <p>Projects</p>
+                </div>
+               <div class="stat">
+                    <h3>{{ about.years_experience }}+</h3>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat">
+                    <h3>{{ posts_count }}+</h3>
+                    <p>Blog Posts</p>
+                </div>
+            </div>
         </div>
 
     </div>
-
 </section>
-
-
-</body>
-</html>
+{% endblock %}

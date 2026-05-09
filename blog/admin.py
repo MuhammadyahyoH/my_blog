@@ -8,6 +8,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'body']
     list_filter = ['created_at']
     ordering = ['-created_at']
+    actions = ['delete_selected']
 
 
 @admin.register(Comment)
@@ -16,3 +17,4 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['created_at']
     search_fields = ['text', 'user__username']
     ordering = ['-created_at']
+    actions = ['delete_selected']

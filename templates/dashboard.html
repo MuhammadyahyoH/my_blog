@@ -1,16 +1,7 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
-    <title>Husayn Portfolio</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
 
-{% include 'navbar.html' %}
-
-<!-- HERO -->
+{% block content %}
 <div class="hero-container">
 
     <div class="hero-left">
@@ -18,9 +9,7 @@
     </div>
 
     <div class="hero-right">
-
         <h1>Husayn Muhammadyahyoyev</h1>
-
         <h3>Backend Developer | Django Developer</h3>
 
         <div class="socials">
@@ -41,12 +30,7 @@
             <a href="/blog" class="btn-primary">Read Blog</a>
             <a href="/about" class="btn-secondary">About Me</a>
         </div>
-
     </div>
 
 </div>
-
-{% include 'footer.html' %}
-
-</body>
-</html>
+{% endblock %}
