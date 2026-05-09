@@ -8,7 +8,7 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('blog/', include('blog.urls')),
     path('likes/', include('likes.urls')),
-
+    path('resume/', include('blog.urls')),
 ]
 
 if settings.DEBUG:

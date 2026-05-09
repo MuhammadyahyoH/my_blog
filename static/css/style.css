@@ -662,3 +662,22 @@ body {
 .delete-btn:active {
     transform: scale(0.95);
 }
+
+.like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+.like-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+}
