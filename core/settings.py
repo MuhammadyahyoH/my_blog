@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from decouple import config
 from dotenv import load_dotenv
 import os
 
@@ -16,14 +16,15 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# SECURITY
-SECRET_KEY = 'django-insecure-%&prp^2$3-#d4-lb@n($e^z4r+at6w-^v!5a56x!&101p(fgeu'
-DEBUG = True
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', cast=bool)
 ALLOWED_HOSTS = []
 
 
 # APPLICATIONS
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,7 +32,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # apps
     'accounts',
     'blog',
     'likes',
@@ -58,11 +58,11 @@ MIDDLEWARE = [
 ]
 
 
-# URLS
+
 ROOT_URLCONF = 'core.urls'
 
 
-# TEMPLATES
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -82,7 +82,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
-# DATABASE
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -91,7 +91,7 @@ DATABASES = {
 }
 
 
-# PASSWORD VALIDATION
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -100,7 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# 🌍 INTERNATIONALIZATION
+
 LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
@@ -115,21 +115,21 @@ USE_I18N = True
 USE_TZ = True
 
 
-# STATIC FILES
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
-# MEDIA FILES
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-# DEFAULT PK
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# LOGIN SYSTEM
+
 LOGIN_URL = '/register/'
 LOGIN_REDIRECT_URL = '/dashboard/'
