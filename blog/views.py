@@ -1,14 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator
+from itertools import groupby
+from collections import defaultdict
 from .models import Post, Comment
 
 
 def post_list(request):
     posts = Post.objects.all()
-
-    # Yil va oyga guruhlash
-    from itertools import groupby
-    from collections import defaultdict
 
     grouped = defaultdict(lambda: defaultdict(list))
     for post in posts:
@@ -16,7 +13,6 @@ def post_list(request):
         month = post.created_at.strftime('%B')
         grouped[year][month].append(post)
 
-    # dict ga o'tkazish (template uchun)
     grouped_posts = {
         year: dict(months)
         for year, months in sorted(grouped.items(), reverse=True)
@@ -31,7 +27,6 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     comments = post.comments.all()
 
-    # Oldingi va keyingi post
     prev_post = Post.objects.filter(id__lt=pk).order_by('-id').first()
     next_post = Post.objects.filter(id__gt=pk).order_by('id').first()
 
@@ -48,31 +43,9 @@ def post_detail(request, pk):
         'next_post': next_post,
     })
 
-from .models import Comment
 
 def delete_comment(request, pk):
     comment = get_object_or_404(Comment, id=pk)
-
-    # faqat comment egasi o‘chira olsin
     if request.user == comment.user:
         comment.delete()
-
     return redirect(request.META.get('HTTP_REFERER', '/'))
-
-from datetime import date
-from blog.models import Post
-from projects.models import Project
-from .models import About
-
-def about_me(request):
-    about = About.objects.first()
-
-    context = {
-        "about": about,
-        "projects_count": Project.objects.count(),
-        "posts_count": Post.objects.count(),
-        "years_learning": date.today().year - 2024,  # start year
-    }
-
-    return render(request, "aboutme.html", context)
-
