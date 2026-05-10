@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Husayn Blog</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <div class="navbar">
         <a href="{% url 'home' %}" class="logo">Husayn's blog</a>
 
         <div class="menu">
             <a href="/blog">Blog</a>
             <a href="/projects">Projects</a>
+            <a href="/contact/">Contact</a>
+            <a href="{% static 'media/resume.pdf' %}" download>Resume</a>
 
             {% if user.is_authenticated %}
                 <a href="/dashboard/">Dashboard</a>
@@ -26,17 +26,14 @@
                 <a href="/register/">Register</a>
             {% endif %}
 
-            <!-- THEME BUTTON -->
             <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
                 🌙
             </button>
         </div>
     </div>
 
-    <!-- PAGE CONTENT -->
     {% block content %}{% endblock %}
 
-    <!-- JS -->
     <script src="{% static 'js/main.js' %}"></script>
 
 </body>
